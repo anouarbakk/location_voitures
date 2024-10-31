@@ -1,16 +1,16 @@
 import express from 'express';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import cors from 'cors'; // Import the cors package
+import cors from 'cors';
 
-// Initialize the Express app
+
 const app = express();
 const PORT = 3000;
 
-// Use CORS middleware
-app.use(cors()); // This will allow all origins to access your API
 
-// Function to open the SQLite database
+app.use(cors());
+
+
 async function openDatabase() {
     return open({
         filename: 'loc_voiture.db',
@@ -18,12 +18,12 @@ async function openDatabase() {
     });
 }
 
-// Endpoint to fetch cars from the database
+
 app.get('/voitures', async (req, res) => {
     try {
         const db = await openDatabase();
         const cars = await db.all('SELECT * FROM voitures');
-        console.log('Fetched cars:', cars); // Log the fetched cars
+        console.log('Fetched cars:', cars);
         res.json(cars);
         await db.close();
     } catch (error) {
@@ -32,7 +32,7 @@ app.get('/voitures', async (req, res) => {
     }
 });
 
-// Start the server
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

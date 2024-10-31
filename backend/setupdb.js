@@ -2,13 +2,13 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 
 (async () => {
-    // Open the database
+
     const db = await open({
         filename: 'loc_voiture.db',
         driver: sqlite3.Database
     });
 
-    // Create tables
+
     await db.exec(`CREATE TABLE IF NOT EXISTS clients (
         id_client INTEGER PRIMARY KEY AUTOINCREMENT,
         nom TEXT NOT NULL,
@@ -48,7 +48,7 @@ import { open } from 'sqlite';
         disponible INTEGER DEFAULT 1
     )`);
 
-    // Insert initial data into voitures
+
     const voituresData = [
         [11, 'Volkswagen', 'Golf', 2020, '223 TN 448', 110.00, 1,],
         [12, 'Toyota', 'Camry', 2020, '223 TN 4458', 145.00, 1],
@@ -62,18 +62,18 @@ import { open } from 'sqlite';
         [20, 'BMW', '320i', 2018, '240 TN 3111', 220.00, 0]
     ];
 
-    // Prepare the insert statement
+ 
     const insertVoiture = await db.prepare(`INSERT INTO voitures (id_voiture, marque, modele, annee, immatriculation, prix_jour, disponible) VALUES (?, ?, ?, ?, ?, ?, ?)`);
 
-    // Insert each voiture into the database
+   
     for (const voiture of voituresData) {
         await insertVoiture.run(...voiture);
     }
 
-    // Finalize the prepared statement
+
     await insertVoiture.finalize();
 
-    // Close the database connection
+    
     await db.close();
     console.log('Database setup complete.');
 })();
