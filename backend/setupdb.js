@@ -15,7 +15,7 @@ import { open } from 'sqlite';
         prenom TEXT NOT NULL,
         email TEXT DEFAULT NULL UNIQUE,
         telephone TEXT DEFAULT NULL,
-        adresse TEXT DEFAULT NULL
+        mot_de_passe TEXT DEFAULT NULL
     )`);
 
     await db.exec(`CREATE TABLE IF NOT EXISTS locations (
@@ -45,25 +45,26 @@ import { open } from 'sqlite';
         annee INTEGER DEFAULT NULL,
         immatriculation TEXT DEFAULT NULL UNIQUE,
         prix_jour DECIMAL(10,2) DEFAULT NULL,
+        image_path TEXT DEFAULT NULL,
         disponible INTEGER DEFAULT 1
     )`);
 
 
     const voituresData = [
-        [11, 'Volkswagen', 'Golf', 2020, '223 TN 448', 110.00, 1,],
-        [12, 'Toyota', 'Camry', 2020, '223 TN 4458', 145.00, 1],
-        [13, 'Hyundai', 'Sonata', 2019, '240 TN 3001', 140.00, 1],
-        [14, 'Honda', 'Civic', 2020, '223 TN 548', 95.00, 1],
-        [15, 'Holden', 'Captiva', 2020, '223 TN 302', 105.00, 1],
-        [16, 'Suzuki', 'Jimny', 2020, '223 TN 1010', 160.00, 1],
-        [17, 'Jeep', 'Cherokee', 2020, '223 TN 1012', 175.00, 1],
-        [18, 'Nissan', 'X-Trail', 2020, '223 TN 1017', 140.00, 1],
-        [19, 'Mercedez-Benz', 'GLC', 2020, '223 TN 1524', 220.00, 1],
-        [20, 'BMW', '320i', 2018, '240 TN 3111', 220.00, 0]
+        [11, 'Volkswagen', 'Golf', 2020, '223 TN 448', 110.00, 1,"./assets/golf-8.jpg"],
+        [12, 'Toyota', 'Camry', 2020, '223 TN 4458', 145.00, 1,"./assets/camri.jpg"],
+        [13, 'Hyundai', 'Sonata', 2019, '240 TN 3001', 140.00, 1,"./assets/sonata.jpg"],
+        [14, 'Honda', 'Civic', 2020, '223 TN 548', 95.00, 1,"./assets/Civic.jpg"],
+        [15, 'Holden', 'Captiva', 2020, '223 TN 302', 105.00, 1,"./assets/captiva.jpg"],
+        [16, 'Suzuki', 'Jimny', 2020, '223 TN 1010', 160.00, 1,"./assets/jimny.jpg"],
+        [17, 'Jeep', 'Cherokee', 2020, '223 TN 1012', 175.00, 1,"./assets/Cherokee.jpg"],
+        [18, 'Nissan', 'X-Trail', 2020, '223 TN 1017', 140.00, 1,"./assets/nissan.jpg"],
+        [19, 'Mercedez-Benz', 'GLC', 2020, '223 TN 1524', 220.00, 1,"./assets/glc.jpg"],
+        [20, 'BMW', '320i', 2018, '240 TN 3111', 220.00, 0,"./assets/320i.jpg"]
     ];
 
  
-    const insertVoiture = await db.prepare(`INSERT INTO voitures (id_voiture, marque, modele, annee, immatriculation, prix_jour, disponible) VALUES (?, ?, ?, ?, ?, ?, ?)`);
+    const insertVoiture = await db.prepare(`INSERT INTO voitures (id_voiture, marque, modele, annee, immatriculation, prix_jour, disponible, image_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`);
 
    
     for (const voiture of voituresData) {

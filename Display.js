@@ -31,8 +31,21 @@ function displayCars(cars) {
         </div>
         <h5 class="car-value add-to-cart"> <span class="cart">Rent</span></h5>
     </div>`;
+    const rentButton = carItem.querySelector('.add-to-cart');
+        rentButton.addEventListener('click', () => {
+            let logged=sessionStorage.getItem('logged');
+            if(logged){
+            window.location.href = './paiment/paiment.html';}
+            else{
+                window.location.href = './login/login_page.html';
+            }
+        });
         carList.appendChild(carItem);
     });
 }
+
+
+
+
 
 window.onload = fetchCars;
