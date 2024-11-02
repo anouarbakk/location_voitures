@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>body{
+        height: 100vh;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        background: #8bbef8;
+        
+    
+    }
+    .fa {
+        padding: 22px;
+        font-size: 40px;
+        width: 88px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px 2px;
+      }
+      
+  
+      a:hover {
+        transform: scale(1.1) ;
+        transition: 00.5s;
+      }
+    h2{
+        color: #4696fd;
+    }
+    
+    img:hover{
+        transform: scale(1.5) ;
+        transition: 00.5s;
+        
+        
+    }
+
+    .aa{
+        
+        width: 400px;
+        height: 400px;
+        margin: 7em auto; 
+        
+        width: 80%;
+        margin: auto;
+    }
+    .navbar{
+        margin: 30px auto;
+        display: flex;
+        align-items: center;
+    }
+    ul{
+        text-align: right;
+        flex: 1;
+    }
+    ul li{ 
+        display: inline-block;
+        line-height: none ;
+        margin:  25px;
+        list-style: none;
+    
+    }
+    ul li a{
+        text-decoration: none;
+        color: #000;
+        padding:  0 10px;
+        position: relative;
+       
+    }
+    ul li a::after{
+        content: '';
+        width: 0%;
+        height: 100%;
+        background-color: hsl(36, 6%, 65%);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -66%;
+        transition: 0.5s;
+        
+    }
+    ul li a:hover::after{
+        width: 100%;
+    }
+    .navbar-icons img{
+        height: 25px;
+        width: 25px;
+        margin-left: 40px;
+        cursor: pointer;
+    
+    }
+    .navbar-icons{
+        margin-left: 40px;
+    }
+    .b{
+        display: flex;
+        margin-top: 50%;
+        
+    }
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgb(41, 39, 39);
+    }
+    
+    .container {
+        background: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+        margin: 15vh auto;
+        padding: 15px;
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 0 15px rgb(0 0 0 / 14%);
+        
+       
+    }
+    .aaa{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+        margin: 10vh ;
+       
+    }
+    a {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #fadea9;
+        text-decoration: none
+    }
+    a:hover {
+        transform: scale(1.1) ;
+        transition: 00.5s;
+      }
+    .images{
+        height: 25px;
+        width: 25px;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+    form img{
+        width: 500px;
+    }
+    
+    input {
+        width: 100%;
+        margin: 5px 0;
+        height: 35px;
+        font-size: 17px;
+        text-align: center;
+        outline: none;
+        border-radius: 15px;
+        border: none;
+        background: rgb(235, 228, 228);
+    }
+    
+    textarea {
+        width: 100%;
+        margin: 5px 0px; width: 441px; height: 83px;
+        font-size: 17px;
+        text-align: center;
+        outline: none;
+        border-radius: 15px;
+        border: none;
+        background: rgb(235, 228, 228);
+    }
+    input[type=submit]{
+        margin: 10px auto;
+        width: 120px;
+        background:#108ff7;
+        color: white;
+        cursor: pointer;
+    }
+    input[type=submit]:hover{
+    background: #335dd1;
+    }
+    @media screen and (max-width:600px) {
+        .container{
+            width: 90%;
+        }
+    }
+    span{
+        
+        color:#f67280 ;
+    
+    }</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+</head>
+<body >
+   
+        
+     
+    <div class="container">
+        <h2>location</h2>
+        <form action=""  name="form1">
+            <input type="text" name="name" id="name" placeholder=" entrer votre pseudo">
+            <input type="text" name="email" id="email" placeholder="entrer votre email">
+            <input type="password" placeholder="mot de passe">
+            
+            <label for="">debut location</label><br>
+            <input type="date" name="" id="">
+            <label for="">fin location</label><br>
+            <input type="date" name="" id="">
+            
+                <input type="submit"
+  
+                name="validate"
+                onclick="ValidateEmail(document.form1.email)"value="Send">
+            
+        </form>
+    </div>
+    <br><br><br><br><br><br>
+    
+    
+</body>
+</html>

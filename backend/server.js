@@ -2,12 +2,18 @@ import express from 'express';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import cors from 'cors';
+import session from 'express-session';
 
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
+app.use(session({
+    secret: 'Anouar123',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 async function openDatabase() {
     return open({
@@ -16,6 +22,7 @@ async function openDatabase() {
     });
 }
 
+// Existing endpoint to fetch cars
 app.get('/voitures', async (req, res) => {
     try {
         const db = await openDatabase();
@@ -29,27 +36,25 @@ app.get('/voitures', async (req, res) => {
     }
 });
 
+
 app.post('/signup', async (req, res) => {
     const { nom, prenom, telephone, email, mot_de_passe } = req.body;
 
-    
     if (!nom || !prenom || !telephone || !email || !mot_de_passe) {
         return res.status(400).json({ message: 'All fields must be filled out.' });
     }
 
- 
     if (!/^\d{8}$/.test(telephone)) {
         return res.status(400).json({ message: 'The phone number must contain exactly 8 digits.' });
     }
 
-   
     if (!/\S+@\S+\.\S+/.test(email)) {
         return res.status(400).json({ message: 'Please enter a valid email address.' });
     }
 
     try {
         const db = await openDatabase();
-        
+
         
         await db.run('INSERT INTO clients (nom, prenom, telephone, email, mot_de_passe) VALUES (?, ?, ?, ?, ?)', [nom, prenom, telephone, email, mot_de_passe]);
 
@@ -64,6 +69,48 @@ app.post('/signup', async (req, res) => {
         }
         res.status(500).json({ message: 'Internal Server Error' });
     }
+});
+
+
+app.post('/login', async (req, res) => {
+    const { email, mot_de_passe } = req.body;
+
+    if (!email || !mot_de_passe) {
+        return res.status(400).json({ message: 'Email and password are required.' });
+    }
+
+    try {
+        const db = await openDatabase();
+        const user = await db.get('SELECT * FROM clients WHERE email = ?', [email]);
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password.' });
+        }
+
+        
+        if (user.mot_de_passe !== mot_de_passe) {
+            return res.status(401).json({ message: 'Invalid email or password.' });
+        }
+
+        req.session.userId = user.id;
+        req.session.username = `${user.nom} ${user.prenom}`;
+
+        console.log('User  logged in:', { email });
+        res.json({ message: 'Login successful', username: req.session.username });
+        await db.close();
+    } catch (error) {
+        console.error('Error logging in user:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+app.get('/profile', (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    res.json({ message: 'This is your profile.' });
 });
 
 app.listen(PORT, () => {

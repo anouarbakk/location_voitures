@@ -35,7 +35,7 @@ function displayCars(cars) {
         rentButton.addEventListener('click', () => {
             let logged=sessionStorage.getItem('logged');
             if(logged){
-            window.location.href = './paiment/paiment.html';}
+            window.location.href = './location/location.html';}
             else{
                 window.location.href = './login/login_page.html';
             }
@@ -43,7 +43,19 @@ function displayCars(cars) {
         carList.appendChild(carItem);
     });
 }
-
+function change_nav(){
+    let navbar=document.querySelector('.navbar');
+    let links=document.querySelector('.nav-links');
+ 
+        let username=sessionStorage.getItem('username');
+        navbar.innerHTML=` <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="./profile.html">${username}</a></li>
+        </ul>`
+}
+let logged=sessionStorage.getItem('logged');
+logged ? change_nav() : null;
 
 
 
