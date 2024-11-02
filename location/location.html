@@ -1,109 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>body{
-        height: 100vh;
-        width: 100%;
-        background-size: cover;
-        background-position: center;
-        background: #8bbef8;
-        
-    
-    }
+    <style>
+        body {
+            height: 100vh;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background: #8bbef8;
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(41, 39, 39);
+        }
 
+        .container {
+            background: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 500px;
+            margin: 15vh auto;
+            padding: 15px;
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 0 15px rgb(0 0 0 / 14%);
+        }
 
-    body {
-        padding: 0;
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        color: rgb(41, 39, 39);
-    }
-    
-    .container {
-        background: rgb(255, 255, 255);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 500px;
-        margin: 15vh auto;
-        padding: 15px;
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 0 15px rgb(0 0 0 / 14%);
-        
-       
-    }
-
-
-    
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 90%;
-    }
-
-    
-    input, .cars{
-        width: 100%;
-        margin: 5px 0;
-        height: 35px;
-        font-size: 17px;
-        text-align: center;
-        outline: none;
-        border-radius: 15px;
-        border: none;
-        background: rgb(235, 228, 228);
-    }
-
-    input[type=submit]{
-        margin: 10px auto;
-        width: 120px;
-        background:#108ff7;
-        color: white;
-        cursor: pointer;
-    }
-    input[type=submit]:hover{
-    background: #335dd1;
-    }
-    @media screen and (max-width:600px) {
-        .container{
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 90%;
         }
-    }
-</style>
+
+        input, .cars {
+            width: 100%;
+            margin: 5px 0;
+            height: 35px;
+            font-size: 17px;
+            text-align: center;
+            outline: none;
+            border-radius: 15px;
+            border: none;
+            background: rgb(235, 228, 228);
+        }
+
+        .submit {
+            margin: 10px auto;
+            width: 120px;
+            background: #108ff7;
+            color: white;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background: #335dd1;
+        }
+
+        .error-message {
+            display: none; /* Initially hidden */
+            color: red;
+            margin-top: 10px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>date</title>
-
-    <script src="location.js" defer></script>
+    <title>Date</title>
+    <script src="location.js" defer type="module"></script>
 </head>
-<body >
-   
-        
-     
+<body>
     <div class="container">
-        <h2>date</h2>
-        <form action=""  name="form1">
-            <label for="cars">choose your car</label><br>
+        <h2>Date</h2>
+        <form id="rentalForm" name="form1">
+            <label for="cars">Choose your car</label><br>
             <select name="cars" id="cars" class="cars">
                 <option value="aaaa">aaaaaaa</option>
             </select>
             <label for="">Pickup Date</label><br>
-            <input type="date" name="" id="" class="start_date">
+            <input type="date" class="start_date" required>
             <label for="">Return Date</label><br>
-            <input type="date" name="" id="" class="end_date">
-            
-                <input type="submit"
-  
-                name="validate"
-                onclick="ValidateEmail(document.form1.email)"value="Send">
-            
+            <input type="date" class="end_date" required>
+            <input class="submit" type="submit" value="Send">
         </form>
+        <div id="errorMessage" class="error-message"></div> <!-- Error message element -->
     </div>
-    
-    
-    
 </body>
 </html>

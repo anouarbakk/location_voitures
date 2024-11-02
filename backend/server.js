@@ -104,6 +104,25 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.post('/location', async (req, res) => {
+    const { id_client, id_voiture, date_debut, date_fin } = req.body;
+
+    if (!id_voiture || !id_client || !date_debut || !date_fin) {
+        return res.status(400).json({ message: 'All fields must be filled out.' });
+    }
+
+    try {
+        const db = await openDatabase();
+        await db.run('INSERT INTO locations (id_client, id_voiture, date_debut, date_fin) VALUES (?, ?, ?, ?)', [id_client, id_voiture, date_debut, date_fin]);
+        console.log('Location created:', { id_voiture, id_client, date_debut, date_fin });
+        res.status(201).json({ message: 'Location created successfully.' });
+        console.log('Location created:', { id_voiture, id_client, date_debut, date_fin });
+        await db.close();
+    } catch (error) {
+        console.error('Error creating location:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+    })
 
 app.get('/profile', (req, res) => {
     if (!req.session.userId) {

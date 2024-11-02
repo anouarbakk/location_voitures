@@ -1,3 +1,6 @@
+import {date} from "./post_date.js"
+
+
 let car_list={}
 async function fetchCars() {
     try {
@@ -25,3 +28,8 @@ function addedcars(){
     });
 }
 fetchCars();
+
+let submit=document.querySelector('.submit');
+submit.addEventListener('click',()=>{
+    date();
+});
