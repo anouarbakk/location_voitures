@@ -92,11 +92,11 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid email or password.' });
         }
 
-        req.session.userId = user.id;
+        req.session.userId = user.id_client;
         req.session.username = `${user.nom} ${user.prenom}`;
 
         console.log('User  logged in:', { email });
-        res.json({ message: 'Login successful', username: req.session.username });
+        res.json({ message: 'Login successful', username: req.session.username, userId: req.session.userId });
         await db.close();
     } catch (error) {
         console.error('Error logging in user:', error);

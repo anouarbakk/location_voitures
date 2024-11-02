@@ -56,7 +56,8 @@ function change_nav(){
 }
 let logged=sessionStorage.getItem('logged');
 logged ? change_nav() : null;
-
+let userId=sessionStorage.getItem('userId');
+console.log(userId);
 
 
 

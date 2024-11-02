@@ -19,6 +19,7 @@ async function sign_in() {
             document.querySelector('.error-message').style.display = 'none';
             alert('Login successful!');
             sessionStorage.setItem('username', data.username);
+            sessionStorage.setItem('userId', data.userId);
             window.location.href = '../index.html';
             let logged=true;
             sessionStorage.setItem('logged', logged);

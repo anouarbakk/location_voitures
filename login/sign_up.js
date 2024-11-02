@@ -64,9 +64,7 @@ async function sign_up() {
             errorMessage.style.display = 'block';
             return;
         }
-
-        let success=true;
-        sessionStorage.setItem('success', success);
+        
     } catch (error) {
         errorMessage.textContent = 'Network error: ' + error.message;
         errorMessage.style.display = 'block';
