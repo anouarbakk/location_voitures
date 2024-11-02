@@ -7,7 +7,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json()); // Middleware to parse JSON request bodies
+app.use(express.json()); 
 
 async function openDatabase() {
     return open({
@@ -16,7 +16,6 @@ async function openDatabase() {
     });
 }
 
-// GET endpoint to fetch cars
 app.get('/voitures', async (req, res) => {
     try {
         const db = await openDatabase();
@@ -25,26 +24,25 @@ app.get('/voitures', async (req, res) => {
         res.json(cars);
         await db.close();
     } catch (error) {
-        console.error('Error fetching cars:', error.message);
+        console.error('Error fetching cars:', error);
         res.status(500).send('Internal Server Error');
     }
 });
 
-// POST endpoint to handle signup data
 app.post('/signup', async (req, res) => {
-    const { name, firstname, phone, email, password } = req.body;
+    const { nom, prenom, telephone, email, mot_de_passe } = req.body;
 
-    // Basic validation
-    if (!name || !firstname || !phone || !email || !password) {
+    
+    if (!nom || !prenom || !telephone || !email || !mot_de_passe) {
         return res.status(400).json({ message: 'All fields must be filled out.' });
     }
 
-    // Check if the phone number is valid
-    if (!/^\d{8}$/.test(phone)) {
+ 
+    if (!/^\d{8}$/.test(telephone)) {
         return res.status(400).json({ message: 'The phone number must contain exactly 8 digits.' });
     }
 
-    // Check if the email is valid
+   
     if (!/\S+@\S+\.\S+/.test(email)) {
         return res.status(400).json({ message: 'Please enter a valid email address.' });
     }
@@ -52,15 +50,18 @@ app.post('/signup', async (req, res) => {
     try {
         const db = await openDatabase();
         
-        // Insert the new user into the database
-        await db.run('INSERT INTO users (name, firstname, phone, email, password) VALUES (?, ?, ?, ?, ?)', [name, firstname, phone, email, password]);
+        
+        await db.run('INSERT INTO clients (nom, prenom, telephone, email, mot_de_passe) VALUES (?, ?, ?, ?, ?)', [nom, prenom, telephone, email, mot_de_passe]);
 
-        console.log('User  signed up:', { name, firstname, phone, email });
+        console.log('User  signed up:', { nom, prenom, telephone, email });
         res.status(201).json({ message: 'User  signed up successfully.' });
 
         await db.close();
     } catch (error) {
-        console.error('Error signing up user:', error.message);
+        console.error('Error signing up user:', error);
+        if (error.code === 'SQLITE_CONSTRAINT') {
+            return res.status(409).json({ message: 'Email already exists.' });
+        }
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });

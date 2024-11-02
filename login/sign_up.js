@@ -1,24 +1,23 @@
 async function sign_up() {
-    let logged = false;
     const errorMessage = document.querySelector('.error-message');
-    const name = document.getElementById('signup-name').value.trim();
-    const firstname = document.getElementById('signup-firstname').value.trim();
-    const phone = document.getElementById('signup-phone').value.trim();
+    const nom = document.getElementById('signup-name').value.trim();
+    const prenom = document.getElementById('signup-firstname').value.trim();
+    const telephone = document.getElementById('signup-phone').value.trim();
     const email = document.getElementById('signup-email').value.trim();
-    const password = document.getElementById('signup-password').value.trim();
+    const mot_de_passe = document.getElementById('signup-password').value.trim();
     const confirmPassword = document.getElementById('signup-confirm-password').value.trim();
 
     errorMessage.style.display = 'none';
     errorMessage.textContent = '';
 
-    // Validation checks
-    if (!name || !firstname || !phone || !email || !password || !confirmPassword) {
+    
+    if (!nom || !prenom || !telephone || !email || !mot_de_passe || !confirmPassword) {
         errorMessage.textContent = 'All fields must be filled out.';
         errorMessage.style.display = 'block';
         return;
     }
 
-    if (!/^\d{8}$/.test(phone)) {
+    if (!/^\d{8}$/.test(telephone)) {
         errorMessage.textContent = 'The phone number must contain exactly 8 digits.';
         errorMessage.style.display = 'block';
         return;
@@ -30,19 +29,18 @@ async function sign_up() {
         return;
     }
 
-    if (password !== confirmPassword) {
+    if (mot_de_passe !== confirmPassword) {
         errorMessage.textContent = 'The passwords do not match.';
         errorMessage.style.display = 'block';
         return;
     }
 
-    
     const userData = {
-        name: name,
-        firstname: firstname,
-        phone: phone,
+        nom: nom,
+        prenom: prenom,
+        telephone: telephone,
         email: email,
-        password: password
+        mot_de_passe: mot_de_passe
     };
 
     try {
@@ -55,20 +53,25 @@ async function sign_up() {
         });
 
         if (!response.ok) {
+            let success=false;
+            sessionStorage.setItem('success', success);
             const errorData = await response.json();
-            errorMessage.textContent = errorData.message || 'An error occurred during signup.';
+            if (response.status === 409) {
+                errorMessage.textContent = 'Conflict: ' + (errorData.message || 'This email or phone number is already in use.');
+            } else {
+                errorMessage.textContent = errorData.message || 'An error occurred during signup.';
+            }
             errorMessage.style.display = 'block';
             return;
         }
 
-        logged = true;
-        sessionStorage.setItem('logged', logged);
-        window.location.href = '../index.html';
-
+        let success=true;
+        sessionStorage.setItem('success', success);
     } catch (error) {
         errorMessage.textContent = 'Network error: ' + error.message;
         errorMessage.style.display = 'block';
     }
 }
+
 
 export { sign_up };
