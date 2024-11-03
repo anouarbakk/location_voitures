@@ -28,9 +28,9 @@ async function date() {
             },
             body: JSON.stringify(date_data)
         });
-
+        
+        
         if (response.ok) {
-            const result = await response.json();
             window.location.href = '../paiment.html';
             alert('Car successfully booked!');
         } else {

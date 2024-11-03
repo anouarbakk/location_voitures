@@ -50,7 +50,7 @@ function change_nav(){
         let username=sessionStorage.getItem('username');
         navbar.innerHTML=` <ul>
             <li><a href="./index.html">Home</a></li>
-            <li><a href="#about">About us</a></li>
+            <li><a href="./about us/about-us.html">About us</a></li>
             <li><a href="./profile.html">${username}</a></li>
         </ul>`
 }
