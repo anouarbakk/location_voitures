@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center text and photo */
+}
+
+h1 {
+    color: #4A90E2;
+}
+
+.profile-photo {
+    width: 150px; /* Set the width of the photo */
+    height: 150px; /* Set the height of the photo */
+    border-radius: 50%; /* Make the photo circular */
+    margin: 20px 0; /* Add margin above and below the photo */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+.profile-card {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #4A90E2;
+    border-radius: 10px;
+}
+
+.profile-card h2 {
+    color: #4A90E2;
+}
+
+.profile-info {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.profile-info p {
+    margin: 10px 0;
+}
+.navbar {
+    position: fixed;
+    right: 20px;
+    top: 20px; 
+    background-color: transparent; 
+    padding: 10px 20px; 
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0; 
+    margin: 0; 
+    display: flex; 
+}
+
+.navbar li {
+    margin-right: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black; 
+    padding: 5px 0; 
+    position: relative; 
+}
+
+.navbar a::after {
+    content: ''; 
+    display: block; 
+    width: 0; 
+    height: 2px; 
+    background-color: blue; 
+    position: absolute; 
+    left: 0; 
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+    width: 100%; 
+}

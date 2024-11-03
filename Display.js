@@ -51,7 +51,7 @@ function change_nav(){
         navbar.innerHTML=` <ul>
             <li><a href="./index.html">Home</a></li>
             <li><a href="./about us/about-us.html">About us</a></li>
-            <li><a href="./profile.html">${username}</a></li>
+            <li><a href="./profile/profile.html">${username}</a></li>
         </ul>`
 }
 let logged=sessionStorage.getItem('logged');

@@ -124,13 +124,35 @@ app.post('/location', async (req, res) => {
     }
     })
 
-app.get('/profile', (req, res) => {
-    if (!req.session.userId) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
-
-    res.json({ message: 'This is your profile.' });
-});
+    app.get('/profile/:id_client', async (req, res) => {
+        const { id_client } = req.params; // Get id_client from URL parameters
+    
+        // Validate if id_client is provided
+        if (!id_client) {
+            return res.status(400).json({ message: 'id_client is required.' });
+        }
+    
+        try {
+            const db = await openDatabase();
+            const user = await db.get('SELECT nom, prenom, email, telephone FROM clients WHERE id_client = ?', [id_client]);
+    
+            if (!user) {
+                return res.status(404).json({ message: 'User  not found.' });
+            }
+    
+            res.json({ 
+                nom: user.nom, 
+                prenom: user.prenom, 
+                email: user.email, 
+                telephone: user.telephone 
+            });
+    
+            await db.close();
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    });
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
