@@ -22,6 +22,14 @@ async function date() {
         return; 
     }
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to midnight for comparison
+    if (new Date(date_debut) <= today) {
+        errorMessage.textContent = 'Pickup date must be later than today.';
+        errorMessage.style.display = 'block';
+        return; 
+    }
+
     const date_data = {
         id_client: id_client, 
         id_voiture: id_voiture,
