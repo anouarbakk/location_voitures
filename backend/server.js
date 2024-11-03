@@ -22,7 +22,7 @@ async function openDatabase() {
     });
 }
 
-// Existing endpoint to fetch cars
+
 app.get('/voitures', async (req, res) => {
     try {
         const db = await openDatabase();
@@ -107,22 +107,28 @@ app.post('/login', async (req, res) => {
 app.post('/location', async (req, res) => {
     const { id_client, id_voiture, date_debut, date_fin } = req.body;
 
+    // Check for missing fields
     if (!id_voiture || !id_client || !date_debut || !date_fin) {
         return res.status(400).json({ message: 'All fields must be filled out.' });
     }
 
+    let db;
     try {
-        const db = await openDatabase();
+        db = await openDatabase();
         await db.run('INSERT INTO locations (id_client, id_voiture, date_debut, date_fin) VALUES (?, ?, ?, ?)', [id_client, id_voiture, date_debut, date_fin]);
+        
         console.log('Location created:', { id_voiture, id_client, date_debut, date_fin });
         res.status(201).json({ message: 'Location created successfully.' });
-        console.log('Location created:', { id_voiture, id_client, date_debut, date_fin });
-        await db.close();
     } catch (error) {
         console.error('Error creating location:', error);
         res.status(500).json({ message: 'Internal Server Error' });
+    } finally {
+        // Ensure the database connection is closed
+        if (db) {
+            await db.close();
+        }
     }
-    })
+});
 
     app.get('/profile/:id_client', async (req, res) => {
         const { id_client } = req.params; // Get id_client from URL parameters

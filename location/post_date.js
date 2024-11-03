@@ -1,16 +1,25 @@
 async function date() {
     const selectElement = document.querySelector('.cars');
-    const id_voiture = selectElement.value; // Get the selected value from the dropdown
+    const id_voiture = selectElement.value; 
     const date_debut = document.querySelector('.start_date').value;
     const date_fin = document.querySelector('.end_date').value;
     const id_client = sessionStorage.getItem('userId');
 
-    // Input validation
+    
+    const errorMessage = document.getElementById('errorMessage');
+    errorMessage.style.display = 'none'; 
+
     if (!id_voiture || !date_debut || !date_fin) {
-        const errorMessage = document.getElementById('errorMessage');
         errorMessage.textContent = 'Please fill out all fields.';
         errorMessage.style.display = 'block';
-        return; // Exit the function if validation fails
+        return; 
+    }
+
+    
+    if (new Date(date_debut) >= new Date(date_fin)) {
+        errorMessage.textContent = 'End date must be after start date.';
+        errorMessage.style.display = 'block';
+        return; 
     }
 
     const date_data = {
@@ -28,19 +37,21 @@ async function date() {
             },
             body: JSON.stringify(date_data)
         });
+
         
-        
-        if (response.ok) {
-            window.location.href = '../paiment.html';
-            alert('Car successfully booked!');
+        if (response.status === 201) {
+            window.location.href = '../paiment.html'; 
+            alert('date is available');
+           
         } else {
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = 'Error: ' + response.statusText;
+            const errorResponse = await response.json();
+            console.error('Error:', errorResponse);
+            errorMessage.textContent = 'Error: ' + (errorResponse.message || response.statusText);
             errorMessage.style.display = 'block';
         }
       
     } catch (error) {
-        const errorMessage = document.getElementById('errorMessage');
+        console.error('Network error:', error);
         errorMessage.textContent = 'Network error: ' + error.message;
         errorMessage.style.display = 'block';
     }

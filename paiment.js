@@ -1,21 +1,21 @@
 document.getElementById('payment-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); 
     
-    // Clear previous error messages
+    
     document.querySelectorAll('.error-message').forEach(function(el) {
         el.textContent = '';
     });
 
-    // Get values from the form
+    
     const cardName = document.getElementById('card-name').value.trim();
     const cardNumber = document.getElementById('card-number').value.trim();
     const expMonth = document.getElementById('exp-month').value.trim();
     const expYear = document.getElementById('exp-year').value.trim();
     const cvv = document.getElementById('cvv').value.trim();
 
-    let isValid = true; // Flag to track overall validity
+    let isValid = true; 
 
-    // Basic validation
+    
     if (!cardName) {
         document.getElementById('name-error').textContent = 'Please enter your name.';
         isValid = false;
@@ -41,10 +41,10 @@ document.getElementById('payment-form').addEventListener('submit', function(even
         isValid = false;
     }
 
-    // If all validations pass
+    
     if (isValid) {
-        // Here you would typically send the data to your server
-        // For demonstration, we'll just log the data to the console
+        
+        
         console.log({
             cardName ,
             cardNumber,
@@ -53,7 +53,7 @@ document.getElementById('payment-form').addEventListener('submit', function(even
             cvv
         });
 
-        // Display a success message
-        alert('Payment details submitted successfully!');
+        
+  
     }
 });

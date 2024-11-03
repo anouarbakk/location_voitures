@@ -1,5 +1,4 @@
 import {date} from "./post_date.js"
-import { checkDate } from "./check_date.js";
 
 let car_list={}
 async function fetchCars() {
