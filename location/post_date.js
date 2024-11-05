@@ -23,7 +23,7 @@ async function date() {
     }
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set time to midnight for comparison
+    today.setHours(0, 0, 0, 0); 
     if (new Date(date_debut) <= today) {
         errorMessage.textContent = 'Pickup date must be later than today.';
         errorMessage.style.display = 'block';
@@ -48,9 +48,11 @@ async function date() {
 
         
         if (response.status === 201) {
-            window.location.href = '../paiment.html'; 
+            window.location.href = '../paiment/paiment.html'; 
             alert('date is available');
-           
+           sessionStorage.setItem('date_debut', date_data.date_debut);
+           sessionStorage.setItem('date_fin', date_data.date_fin);
+           sessionStorage.setItem('id_voiture', date_data.id_voiture);
         } else {
             const errorResponse = await response.json();
             console.error('Error:', errorResponse);

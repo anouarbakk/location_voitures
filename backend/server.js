@@ -35,6 +35,28 @@ app.get('/voitures', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+app.get('/voiture/prix/:id_voiture', async (req, res) => {
+    const { id_voiture } = req.params; 
+
+    if (!id_voiture) {
+        return res.status(400).json({ message: 'id_voiture is required.' });
+    }
+
+    try {
+        const db = await openDatabase();
+        const car = await db.get('SELECT prix_jour FROM voitures WHERE id_voiture = ?', [id_voiture]);
+
+        if (!car) {
+            return res.status(404).json({ message: 'Car not found.' });
+        }
+
+        res.json({ prix_jour: car.prix_jour });
+        await db.close();
+    } catch (error) {
+        console.error('Error fetching car price:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 
 
 app.post('/signup', async (req, res) => {
@@ -160,6 +182,46 @@ app.post('/location', async (req, res) => {
         }
     });
 
+    app.post('/id_location', async (req, res) => {
+        try {
+            const db = await openDatabase();
+            
+            
+            const lastLocation = await db.get('SELECT id_location FROM locations ORDER BY id_location DESC LIMIT 1');
+    
+            if (!lastLocation) {
+                return res.status(404).json({ message: 'No locations found.' });
+            }
+    
+            
+            res.json({ last_id_location: lastLocation.id_location });
+            
+            await db.close();
+        } catch (error) {
+            console.error('Error fetching last location:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    });
+
+    app.post('/postPayments', async (req, res) => {
+        const { id_location, montant, date_paiement, mode_paiement } = req.body;
+    
+        
+        if (!id_location || !montant || !date_paiement || !mode_paiement) {
+            return res.status(400).json({ message: 'All fields must be filled out.' });
+        }
+    
+        try {
+            const db = await openDatabase();
+            await db.run('INSERT INTO paiements (id_location, montant, date_paiement, mode_paiement) VALUES (?, ?, ?, ?)', [id_location, montant, date_paiement, mode_paiement]);
+    
+            console.log('Payment recorded:', { id_location, montant, date_paiement, mode_paiement });
+            res.status(201).json({ message: 'Payment recorded successfully.' });
+        } catch (error) {
+            console.error('Error recording payment:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    });
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
