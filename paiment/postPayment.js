@@ -22,8 +22,12 @@ async function sendPayment(id_location, montant, date_paiement, mode_paiement) {
         const result = await response.json();
         console.log('Payment successful:', result);
         
+        // Redirect only if the payment was successful
+        window.location = '../index.html';
     } catch (error) {
         console.error('Error sending payment details:', error);
+        // You might want to show an error message to the user here
     }
 }
-export{sendPayment}
+
+export { sendPayment };
