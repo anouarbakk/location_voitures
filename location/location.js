@@ -29,7 +29,8 @@ function addedcars(){
 fetchCars();
 
 let submit=document.querySelector('.submit');
-submit.addEventListener('click',()=>{
+submit.addEventListener('click',(event)=>{
+    event.preventDefault();
     date();
   
 });

@@ -4,7 +4,6 @@ async function date() {
     const date_debut = document.querySelector('.start_date').value;
     const date_fin = document.querySelector('.end_date').value;
     const id_client = sessionStorage.getItem('userId');
-
     
     const errorMessage = document.getElementById('errorMessage');
     errorMessage.style.display = 'none'; 
@@ -48,8 +47,7 @@ async function date() {
 
         
         if (response.status === 201) {
-            window.location.href = '../paiment/paiment.html'; 
-            alert('date is available');
+            window.location.href = '../paiment/paiment.html';
            sessionStorage.setItem('date_debut', date_data.date_debut);
            sessionStorage.setItem('date_fin', date_data.date_fin);
            sessionStorage.setItem('id_voiture', date_data.id_voiture);

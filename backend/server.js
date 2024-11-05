@@ -138,8 +138,6 @@ app.post('/location', async (req, res) => {
     try {
         db = await openDatabase();
         await db.run('INSERT INTO locations (id_client, id_voiture, date_debut, date_fin) VALUES (?, ?, ?, ?)', [id_client, id_voiture, date_debut, date_fin]);
-        
-        console.log('Location created:', { id_voiture, id_client, date_debut, date_fin });
         res.status(201).json({ message: 'Location created successfully.' });
     } catch (error) {
         console.error('Error creating location:', error);
