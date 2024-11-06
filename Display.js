@@ -37,7 +37,7 @@ function displayCars(cars) {
             if(logged){
             window.location.href = './location/location.html';}
             else{
-                window.location.href = './login/login_page.html';
+                window.location.href = './new_login/LOGIN.html';
             }
         });
         carList.appendChild(carItem);
