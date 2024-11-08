@@ -1,8 +1,9 @@
 body {
-    font-family: Arial, sans-serif; 
-    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 20px;
+    padding-top:100px;
+    background-color: #eaeaea;
 }
 
 ul {
@@ -110,48 +111,6 @@ ul {
     height: 100%;
     object-fit: cover;
 }
-.navbar {
-    position: fixed;
-    right: 20px;
-    top: 20px; 
-    background-color: transparent; 
-    padding: 10px 20px; 
-}
-
-.navbar ul {
-    list-style-type: none;
-    padding: 0; 
-    margin: 0; 
-    display: flex; 
-}
-
-.navbar li {
-    margin-right: 20px;
-}
-
-.navbar a {
-    text-decoration: none;
-    color: black; 
-    padding: 5px 0; 
-    position: relative; 
-}
-
-.navbar a::after {
-    content: ''; 
-    display: block; 
-    width: 0; 
-    height: 2px; 
-    background-color: blue; 
-    position: absolute; 
-    left: 0; 
-    bottom: -5px;
-    transition: width 0.3s ease;
-}
-
-.navbar a:hover::after {
-    width: 100%; 
-}
-
 .content {
     padding: 20px;
 }
@@ -160,7 +119,6 @@ ul {
 }
 .header {
     text-align: center; 
-    margin-top: 20px;
 }
 
 .title {
@@ -168,4 +126,181 @@ ul {
     color: #4A90E2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     margin-top:50px;
+}
+.navbar a {
+    display: inline-block;
+    font-size: 18px;
+    color: #222;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 20px;
+    transition: .3s;
+    opacity: 0;
+    animation: slideTop .5s ease forwards;
+    animation-delay: calc(.2s * var(--i));
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: #1743e3;
+}
+.header {
+    position: fixed;
+    height:10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 8%;
+    background-color:#ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0;
+    animation: slideRight 1s ease forwards;
+}
+
+.social-media {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    height: 40px;
+}
+
+.social-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid transparent;
+    text-decoration: none;
+    transform: rotate(45deg);
+    transition: .5s;
+    opacity: 0;
+    animation: slideSci .5s ease forwards;
+    animation-delay: calc(.2s * var(--i));
+}
+
+.social-media a:hover {
+    border-color: #eaeaea;
+}
+
+.social-media a i {
+    font-size: 24px;
+    color: #eaeaea;
+    transform: rotate(-45deg);
+}
+
+
+
+
+
+
+
+
+
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slideTop {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slideBottom {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slideSci {
+    0% {
+        transform: translateX(100px) rotate(45deg);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translateX(0px) rotate(45deg);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes car {
+    0% {
+        transform: translate(300px, -300px) scale(0) rotate(-45deg);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translate(0, 0) scale(1) rotate(-45deg);
+        opacity: 1;
+    }
+}
+
+@keyframes rhombus2 {
+    0% {
+        right: -40%;
+        opacity: 0;
+    }
+    
+    100% {
+        right: -25%;
+        opacity: 1;
+    }
 }

@@ -46,8 +46,7 @@ id_client=sessionStorage.getItem('userId');
 fetchClientDetails(id_client);
 let navbar=document.querySelector('.navbar');
 let username=sessionStorage.getItem('username');
-navbar.innerHTML=` <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../about us/about-us.html">About us</a></li>
-            <li><a href="./profile.html">${username}</a></li>
-        </ul>`
+navbar.innerHTML=` <a href="../Landing-Page/index.html" style="--i:1" >Home</a>
+            <a href="../about us/about-us.html" style="--i:2">About us</a>
+            <a href="../index.html" style="--i:3" >Store</a>
+            <a href="./profile.html" style="--i:3" class="active">${username}</a>`
