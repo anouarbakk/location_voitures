@@ -13,6 +13,7 @@ let prix_jour = 0;
 let montant = 0;
 let mode_paiement = "carte";
 let id_voiture = sessionStorage.getItem('id_voiture');
+console.log
 let dated = sessionStorage.getItem('date_debut');
 dated = new Date(dated);
 let datef = sessionStorage.getItem('date_fin');
@@ -83,7 +84,9 @@ document.getElementById('payment-form').addEventListener('submit', async functio
             date_paiement,
             mode_paiement
         });
+        window.location.href = '../index.html';
         await sendPayment(id_location, montant, date_paiement, mode_paiement);
+        
     }
 });
 

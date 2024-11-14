@@ -27,7 +27,7 @@ function displayCars(cars) {
                 <h6 class="font-weight-bold">${car.modele}</h6>
                 <h6>${car.marque}</h6>
             </div>
-            <h5 class="car-value">$ <span class="car-price">${car.prix_jour}</span></h5>
+            <h5 class="car-value"><span class="car-price">${car.prix_jour}</span> DT</h5>
         </div>
         <h5 class="car-value add-to-cart"> <span class="cart">Rent</span></h5>
     </div>`;

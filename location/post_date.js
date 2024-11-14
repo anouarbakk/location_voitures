@@ -47,10 +47,11 @@ async function date() {
 
         
         if (response.status === 201) {
-            window.location.href = '../paiment/paiment.html';
+            
            sessionStorage.setItem('date_debut', date_data.date_debut);
            sessionStorage.setItem('date_fin', date_data.date_fin);
            sessionStorage.setItem('id_voiture', date_data.id_voiture);
+           window.location.href = '../paiment/paiment.html';
         } else {
             const errorResponse = await response.json();
             console.error('Error:', errorResponse);
